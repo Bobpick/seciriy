@@ -1,0 +1,38 @@
+import hmac
+import hashlib
+import time
+
+# Secret key for generating OTP
+SECRET_KEY = b"1029384756qpalzmXONSJRUT@+$&"
+
+# Function to generate OTP
+def generate_otp(secret_key, interval=30):
+    # Get current time in seconds
+    current_time = int(time.time())
+
+    # Calculate number of intervals elapsed
+    intervals_elapsed = current_time // interval
+
+    # Convert intervals elapsed to bytes
+    intervals_elapsed_bytes = intervals_elapsed.to_bytes(8, byteorder="big")
+
+    # Generate HMAC-SHA1 hash using secret key and intervals elapsed
+    hmac_hash = hmac.new(secret_key, intervals_elapsed_bytes, hashlib.sha512).digest()
+
+    # Get last 4 bits of the hash
+    offset = hmac_hash[-1] & 0x0F
+
+    # Get 4 bytes from the hash starting at the offset
+    otp_bytes = hmac_hash[offset:offset+4]
+
+    # Convert bytes to integer
+    otp = int.from_bytes(otp_bytes, byteorder="big") & 0x7FFFFFFF
+
+    # Generate 6-digit OTP
+    otp = str(otp % 1000000).zfill(8)
+
+    return otp
+
+# Generate and display OTP
+otp = generate_otp(SECRET_KEY)
+print("OTP:", otp)
