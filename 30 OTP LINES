@@ -1,0 +1,25 @@
+
+import random
+import string
+
+def generate_random_string(length):
+    characters = string.ascii_uppercase
+    return ''.join(random.choice(characters) for _ in range(length))
+
+def segment_string(string, segment_length):
+    return ' '.join([string[i:i+segment_length] for i in range(0, len(string), segment_length)])
+
+# Generate 30 random strings
+num_strings = 30
+string_length = 400
+segment_length = 5
+
+random_strings = []
+for _ in range(num_strings):
+    random_string = generate_random_string(string_length)
+    segmented_string = segment_string(random_string, segment_length)
+    random_strings.append(segmented_string)
+
+# Print the generated strings
+for i, random_string in enumerate(random_strings):
+    print(f"String {i+1}: {random_string}")
