@@ -53,6 +53,8 @@ This project simulates the QOTP process using classical bits and operations. It 
         -   The script will generate a random key, encrypt the message, and display the encrypted binary data.
         -   A QR code image (`encrypted_message_qrcode.png`) shown above, containing the encrypted messsage will be generated and saved in the same directory as the script. Share this image with the recipient for decryption.
 
+        ![Encrypted Message QRCode](https://github.com/Bobpick/seciriy/blob/main/key_qrcode.png)
+
     -   **Decrypt Message (2):**
         -   Enter the encrypted binary data as a single, continuous string (e.g., `01011010...`).
         -   Enter the corresponding key (also as a single, continuous binary string).
